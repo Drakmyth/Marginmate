@@ -53,7 +53,7 @@ MarginmateBrowserMixin = {}
 function MarginmateBrowserMixin:OnLoad()
     self.CharacterFilter:SetText("Character: All")
     self.ProfessionFilter:SetText("Profession: All")
-    self.SearchBox:SetInstructions("Search recipes")
+    self.SearchBox.Instructions:SetText("Search recipes")
 
     local rows = {
         self.LeftPane.Rows.Row1,
