@@ -68,6 +68,11 @@ function MarginmateBrowserMixin:OnLoad()
     self:SelectRecipe(Marginmate.mockRecipes[1])
 end
 
+function MarginmateBrowserMixin:SetContext(character, profession)
+    self.CharacterFilter:SetText("Character: " .. (character or "All"))
+    self.ProfessionFilter:SetText("Profession: " .. (profession or "All"))
+end
+
 function MarginmateBrowserMixin:SelectRecipe(recipe)
     local details = self.RightPane
     details.EmptyState:SetShown(not recipe)
@@ -106,3 +111,36 @@ SlashCmdList.MARGINMATE = Marginmate.Toggle
 function Marginmate_OnAddonCompartmentClick()
     Marginmate.Toggle()
 end
+
+local professionTabInitialized = false
+
+local function InitializeProfessionTab()
+    if professionTabInitialized or not ProfessionsFrame then
+        return
+    end
+    professionTabInitialized = true
+
+    local page = CreateFrame("Frame", "MarginmateProfessionPage", ProfessionsFrame, "MarginmateBrowserTemplate")
+    page:SetPoint("TOPLEFT", ProfessionsFrame, "TOPLEFT", 4, -58)
+    page:SetPoint("BOTTOMRIGHT", ProfessionsFrame, "BOTTOMRIGHT", -4, 4)
+    page.GetDesiredPageWidth = function()
+        return ProfessionsFrame.CraftingPage:GetDesiredPageWidth()
+    end
+    page:SetScript("OnShow", function(self)
+        local info = ProfessionsFrame:GetProfessionInfo()
+        self:SetContext(UnitName("player"), info and (info.professionName or info.parentProfessionName))
+    end)
+
+    Marginmate.professionTabID = ProfessionsFrame:AddNamedTab("Marginmate", page)
+    ProfessionsFrame.TabSystem:Layout()
+end
+
+local eventFrame = CreateFrame("Frame")
+eventFrame:RegisterEvent("ADDON_LOADED")
+eventFrame:SetScript("OnEvent", function(_, _, loadedAddon)
+    if loadedAddon == "Blizzard_Professions" then
+        InitializeProfessionTab()
+    elseif loadedAddon == addonName and C_AddOns.IsAddOnLoaded("Blizzard_Professions") then
+        C_Timer.After(0, InitializeProfessionTab)
+    end
+end)
