@@ -1,0 +1,12 @@
+## Interface: 120105
+## Version: 0.1.120105.0
+## Author: Drakmyth
+## Title: Marginmate
+## Notes: Identifies potentially profitable products from recipes your characters know.
+## RequiredDeps:
+## SavedVariables:
+## SavedVariablesPerCharacter:
+## X-Repository: https://github.com/Drakmyth/Marginmate
+## X-Discord: http://discord.com/invite/aQkD4grbe8
+
+Marginmate.xml
