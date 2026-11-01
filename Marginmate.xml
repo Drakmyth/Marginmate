@@ -62,14 +62,17 @@
                 </Anchors>
                 <Layers>
                     <Layer level="OVERLAY">
-                        <FontString parentKey="RecipeHeader" inherits="GameFontNormalSmall" text="Recipe">
-                            <Anchors><Anchor point="TOPLEFT" x="42" y="-38" /></Anchors>
+                        <FontString parentKey="RecipeHeader" inherits="GameFontNormalSmall" text="Recipe" justifyH="LEFT">
+                            <Size x="150" />
+                            <Anchors><Anchor point="TOPLEFT" x="46" y="-38" /></Anchors>
                         </FontString>
-                        <FontString parentKey="CostHeader" inherits="GameFontNormalSmall" text="Cost">
-                            <Anchors><Anchor point="TOP" x="72" y="-38" /></Anchors>
+                        <FontString parentKey="CostHeader" inherits="GameFontNormalSmall" text="Cost" justifyH="CENTER">
+                            <Size x="64" />
+                            <Anchors><Anchor point="TOPLEFT" x="200" y="-38" /></Anchors>
                         </FontString>
-                        <FontString parentKey="ProfitHeader" inherits="GameFontNormalSmall" text="Est. Profit/Day">
-                            <Anchors><Anchor point="TOPRIGHT" x="-6" y="-38" /></Anchors>
+                        <FontString parentKey="ProfitHeader" inherits="GameFontNormalSmall" text="Profit/Day" justifyH="RIGHT">
+                            <Size x="70" />
+                            <Anchors><Anchor point="TOPRIGHT" x="-10" y="-38" /></Anchors>
                         </FontString>
                     </Layer>
                 </Layers>
