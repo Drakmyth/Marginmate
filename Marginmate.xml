@@ -107,16 +107,22 @@
                             <Layer level="OVERLAY">
                                 <FontString parentKey="Name" inherits="GameFontNormalLarge" justifyH="LEFT"><Anchors><Anchor point="LEFT" relativeKey="$parent.Icon" relativePoint="RIGHT" x="10" /></Anchors></FontString>
                                 <FontString inherits="GameFontNormal" text="Pricing"><Anchors><Anchor point="TOPLEFT" y="-58" /></Anchors></FontString>
-                                <FontString inherits="GameFontHighlight" text="Product value&#10;Reagent cost&#10;Unit profit" justifyH="LEFT"><Anchors><Anchor point="TOPLEFT" y="-82" /></Anchors></FontString>
+                                <FontString inherits="GameFontHighlight" text="Product value"><Anchors><Anchor point="TOPLEFT" y="-82" /></Anchors></FontString>
                                 <FontString parentKey="ProductValue" inherits="GameFontHighlight" justifyH="RIGHT"><Anchors><Anchor point="TOPRIGHT" y="-82" /></Anchors></FontString>
+                                <FontString inherits="GameFontHighlight" text="Reagent cost"><Anchors><Anchor point="TOPLEFT" y="-98" /></Anchors></FontString>
                                 <FontString parentKey="ReagentCost" inherits="GameFontHighlight" justifyH="RIGHT"><Anchors><Anchor point="TOPRIGHT" y="-98" /></Anchors></FontString>
+                                <FontString inherits="GameFontHighlight" text="Unit profit"><Anchors><Anchor point="TOPLEFT" y="-114" /></Anchors></FontString>
                                 <FontString parentKey="UnitProfit" inherits="GameFontHighlight" justifyH="RIGHT"><Anchors><Anchor point="TOPRIGHT" y="-114" /></Anchors></FontString>
                                 <FontString inherits="GameFontNormal" text="Market estimate"><Anchors><Anchor point="TOPLEFT" y="-146" /></Anchors></FontString>
-                                <FontString inherits="GameFontHighlight" text="Regional sold/day&#10;Assumed market share&#10;Estimated daily sales&#10;Estimated profit/day&#10;Suggested stock" justifyH="LEFT"><Anchors><Anchor point="TOPLEFT" y="-170" /></Anchors></FontString>
+                                <FontString inherits="GameFontHighlight" text="Regional sold/day"><Anchors><Anchor point="TOPLEFT" y="-170" /></Anchors></FontString>
                                 <FontString parentKey="SoldPerDay" inherits="GameFontHighlight" justifyH="RIGHT"><Anchors><Anchor point="TOPRIGHT" y="-170" /></Anchors></FontString>
+                                <FontString inherits="GameFontHighlight" text="Assumed market share"><Anchors><Anchor point="TOPLEFT" y="-186" /></Anchors></FontString>
                                 <FontString parentKey="MarketShare" inherits="GameFontHighlight" justifyH="RIGHT"><Anchors><Anchor point="TOPRIGHT" y="-186" /></Anchors></FontString>
+                                <FontString inherits="GameFontHighlight" text="Estimated daily sales"><Anchors><Anchor point="TOPLEFT" y="-202" /></Anchors></FontString>
                                 <FontString parentKey="DailySales" inherits="GameFontHighlight" justifyH="RIGHT"><Anchors><Anchor point="TOPRIGHT" y="-202" /></Anchors></FontString>
+                                <FontString inherits="GameFontHighlight" text="Estimated profit/day"><Anchors><Anchor point="TOPLEFT" y="-218" /></Anchors></FontString>
                                 <FontString parentKey="DailyProfit" inherits="GameFontHighlight" justifyH="RIGHT"><Anchors><Anchor point="TOPRIGHT" y="-218" /></Anchors></FontString>
+                                <FontString inherits="GameFontHighlight" text="Suggested stock"><Anchors><Anchor point="TOPLEFT" y="-234" /></Anchors></FontString>
                                 <FontString parentKey="SuggestedStock" inherits="GameFontHighlight" justifyH="RIGHT"><Anchors><Anchor point="TOPRIGHT" y="-234" /></Anchors></FontString>
                                 <FontString inherits="GameFontNormal" text="Reagents"><Anchors><Anchor point="TOPLEFT" y="-270" /></Anchors></FontString>
                                 <FontString parentKey="Reagents" inherits="GameFontHighlight" justifyH="LEFT"><Size x="300" y="80" /><Anchors><Anchor point="TOPLEFT" y="-294" /></Anchors></FontString>
