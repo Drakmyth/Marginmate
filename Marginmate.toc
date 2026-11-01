@@ -3,7 +3,7 @@
 ## Author: Drakmyth
 ## Title: Marginmate
 ## IconTexture: Interface/Icons/inv_misc_coin_02
-## Notes: |cff9d9d9dby|r |cff8788eeDrakmyth|r|n|nHelps you identify potentially profitable products from recipes your characters know.
+## Notes: |cff9d9d9dby|r |cff8788eeDrakmyth|r|n|nHelps you discover potential crafting profits while you loiter at the auction house.
 ## RequiredDeps:
 ## SavedVariables:
 ## SavedVariablesPerCharacter:
