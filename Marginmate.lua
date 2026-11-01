@@ -155,12 +155,11 @@ function MarginmateMainFrameMixin:OnLoad()
 end
 
 function Marginmate.Toggle()
-    local showStandalone = not MarginmateMainFrame:IsShown()
-    if showStandalone and ProfessionsFrame and Marginmate.professionTabID
-        and ProfessionsFrame:GetTab() == Marginmate.professionTabID then
-        ProfessionsFrame:SetTab(ProfessionsFrame.recipesTabID)
+    if ProfessionsFrame and ProfessionsFrame:IsShown() and Marginmate.professionTabID then
+        ProfessionsFrame:SetTab(Marginmate.professionTabID)
+        return
     end
-    MarginmateMainFrame:SetShown(showStandalone)
+    MarginmateMainFrame:SetShown(not MarginmateMainFrame:IsShown())
 end
 
 SLASH_MARGINMATE1 = "/marginmate"
@@ -191,6 +190,9 @@ local function InitializeProfessionTab()
     end)
 
     Marginmate.professionTabID = ProfessionsFrame:AddNamedTab("Marginmate", page)
+    ProfessionsFrame:HookScript("OnShow", function()
+        MarginmateMainFrame:Hide()
+    end)
     ProfessionsFrame.TabSystem:Layout()
 end
 
