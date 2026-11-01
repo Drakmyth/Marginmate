@@ -23,7 +23,7 @@ local function FormatCompactMoney(value, unknownText)
     if gold > 0 then
         table.insert(parts, color:WrapTextInColorCode(gold) .. GOLD)
     end
-    if silver > 0 or gold > 0 then
+    if silver > 0 then
         table.insert(parts, color:WrapTextInColorCode(silver) .. SILVER)
     end
     if copper > 0 or #parts == 0 then
