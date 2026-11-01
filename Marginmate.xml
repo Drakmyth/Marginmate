@@ -32,41 +32,39 @@
 
     <Frame name="MarginmateBrowserTemplate" mixin="MarginmateBrowserMixin" virtual="true">
         <Frames>
-            <Button parentKey="CharacterFilter" inherits="UIPanelButtonTemplate">
-                <Size x="120" y="22" />
-                <Anchors><Anchor point="TOPLEFT" x="8" y="-8" /></Anchors>
-            </Button>
-            <Button parentKey="ProfessionFilter" inherits="UIPanelButtonTemplate">
-                <Size x="130" y="22" />
-                <Anchors><Anchor point="LEFT" relativeKey="$parent.CharacterFilter" relativePoint="RIGHT" x="4" /></Anchors>
-            </Button>
-            <EditBox parentKey="SearchBox" inherits="SearchBoxTemplate">
-                <Size x="200" y="22" />
-                <Anchors><Anchor point="TOPRIGHT" x="-8" y="-8" /></Anchors>
-            </EditBox>
             <Frame parentKey="LeftPane" inherits="InsetFrameTemplate3">
                 <Size x="342" />
                 <Anchors>
-                    <Anchor point="TOPLEFT" x="8" y="-38" />
+                    <Anchor point="TOPLEFT" x="8" y="-8" />
                     <Anchor point="BOTTOMLEFT" x="8" y="8" />
                 </Anchors>
                 <Layers>
                     <Layer level="OVERLAY">
                         <FontString parentKey="RecipeHeader" inherits="GameFontNormalSmall" text="Recipe">
-                            <Anchors><Anchor point="TOPLEFT" x="42" y="-8" /></Anchors>
+                            <Anchors><Anchor point="TOPLEFT" x="42" y="-38" /></Anchors>
                         </FontString>
                         <FontString parentKey="CostHeader" inherits="GameFontNormalSmall" text="Cost">
-                            <Anchors><Anchor point="TOP" x="72" y="-8" /></Anchors>
+                            <Anchors><Anchor point="TOP" x="72" y="-38" /></Anchors>
                         </FontString>
                         <FontString parentKey="ProfitHeader" inherits="GameFontNormalSmall" text="Est. Profit/Day">
-                            <Anchors><Anchor point="TOPRIGHT" x="-6" y="-8" /></Anchors>
+                            <Anchors><Anchor point="TOPRIGHT" x="-6" y="-38" /></Anchors>
                         </FontString>
                     </Layer>
                 </Layers>
                 <Frames>
+                    <DropdownButton parentKey="FilterDropdown" inherits="WowStyle1FilterDropdownTemplate">
+                        <Anchors><Anchor point="TOPRIGHT" x="-8" y="-9" /></Anchors>
+                    </DropdownButton>
+                    <EditBox parentKey="SearchBox" autoFocus="false" inherits="SearchBoxTemplate">
+                        <Size y="20" />
+                        <Anchors>
+                            <Anchor point="RIGHT" relativeKey="$parent.FilterDropdown" relativePoint="LEFT" x="-4" />
+                            <Anchor point="TOPLEFT" x="13" y="-8" />
+                        </Anchors>
+                    </EditBox>
                     <Frame parentKey="Rows">
                         <Anchors>
-                            <Anchor point="TOPLEFT" x="6" y="-24" />
+                            <Anchor point="TOPLEFT" x="6" y="-54" />
                             <Anchor point="BOTTOMRIGHT" x="-6" y="6" />
                         </Anchors>
                         <Frames>

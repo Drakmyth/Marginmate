@@ -1,36 +1,83 @@
 local addonName, Marginmate = ...
 
+local VALUE_POSITIVE = "|cff20ff20"
+local VALUE_NEGATIVE = "|cffff2020"
+local GOLD = "|cffffd700g|r"
+local SILVER = "|cffc7c7cfs|r"
+local COPPER = "|cffeda55fc|r"
+
+local function FormatMoney(value, unknownText)
+    if value == nil then
+        return "|cff9d9d9d" .. (unknownText or "Unknown") .. "|r"
+    end
+
+    local color = value < 0 and VALUE_NEGATIVE or VALUE_POSITIVE
+    local amount = math.abs(value)
+    local gold = math.floor(amount / 10000)
+    local silver = math.floor((amount % 10000) / 100)
+    local copper = amount % 100
+    local sign = value < 0 and color .. "-|r" or ""
+    local parts = {}
+
+    if gold > 0 then
+        table.insert(parts, color .. gold .. "|r" .. GOLD)
+    end
+    if silver > 0 or gold > 0 then
+        table.insert(parts, color .. silver .. "|r" .. SILVER)
+    end
+    if copper > 0 or #parts == 0 then
+        table.insert(parts, color .. copper .. "|r" .. COPPER)
+    end
+
+    return sign .. table.concat(parts, " ")
+end
+
+local function FormatReagents(reagents)
+    if not reagents then
+        return "Pricing data is unavailable."
+    end
+
+    local lines = {}
+    for _, reagent in ipairs(reagents) do
+        table.insert(lines, string.format("%d × %s    %s", reagent.quantity, reagent.name, FormatMoney(reagent.cost)))
+    end
+    return table.concat(lines, "\n")
+end
+
 Marginmate.mockRecipes = {
     {
         icon = 134808,
         name = "Algari Mana Potion",
-        cost = "72g 80s",
-        dailyProfit = "100g 44s",
-        productValue = "105g 20s",
-        unitProfit = "32g 40s",
+        cost = 728000,
+        dailyProfit = 1004400,
+        productValue = 1052000,
+        unitProfit = 324000,
         soldPerDay = "62.4",
         marketShare = "5%",
         dailySales = "3.1",
         suggestedStock = "3",
-        reagents = "4 × Mycobloom    20g 00s\n2 × Luredrop      52g 80s",
+        reagents = {
+            { quantity = 4, name = "Mycobloom", cost = 200000 },
+            { quantity = 2, name = "Luredrop", cost = 528000 },
+        },
     },
     {
         icon = 134828,
         name = "Flask of Alchemical Chaos",
-        cost = "85g 10s",
-        dailyProfit = "840g 00s",
+        cost = 851000,
+        dailyProfit = 8400000,
     },
     {
         icon = 4548875,
         name = "Tempered Framework",
-        cost = "Unknown",
-        dailyProfit = "—",
     },
     {
         icon = 134937,
-        name = "Vendor-only Example",
-        cost = "Unknown",
-        dailyProfit = "Unknown",
+        name = "Unprofitable Example",
+        cost = 140000,
+        dailyProfit = -425000,
+        productValue = 125000,
+        unitProfit = -15000,
     },
 }
 
@@ -44,16 +91,21 @@ function MarginmateRecipeRowMixin:SetRecipe(recipe)
     self.recipe = recipe
     self.Icon:SetTexture(recipe.icon)
     self.Name:SetText(recipe.name)
-    self.Cost:SetText(recipe.cost)
-    self.DailyProfit:SetText(recipe.dailyProfit)
+    self.Cost:SetText(FormatMoney(recipe.cost))
+    self.DailyProfit:SetText(FormatMoney(recipe.dailyProfit, "—"))
 end
 
 MarginmateBrowserMixin = {}
 
 function MarginmateBrowserMixin:OnLoad()
-    self.CharacterFilter:SetText("Character: All")
-    self.ProfessionFilter:SetText("Profession: All")
-    self.SearchBox.Instructions:SetText("Search recipes")
+    self.LeftPane.SearchBox.Instructions:SetText("Search recipes")
+    self.LeftPane.FilterDropdown:SetupMenu(function(_, rootDescription)
+        rootDescription:CreateTitle("Character")
+        rootDescription:CreateButton(self.contextCharacter or "All", function() end)
+        rootDescription:CreateTitle("Profession")
+        rootDescription:CreateButton(self.contextProfession or "All", function() end)
+        rootDescription:CreateTitle("Additional filters are not implemented yet")
+    end)
 
     local rows = {
         self.LeftPane.Rows.Row1,
@@ -69,8 +121,8 @@ function MarginmateBrowserMixin:OnLoad()
 end
 
 function MarginmateBrowserMixin:SetContext(character, profession)
-    self.CharacterFilter:SetText("Character: " .. (character or "All"))
-    self.ProfessionFilter:SetText("Profession: " .. (profession or "All"))
+    self.contextCharacter = character
+    self.contextProfession = profession
 end
 
 function MarginmateBrowserMixin:SelectRecipe(recipe)
@@ -83,15 +135,15 @@ function MarginmateBrowserMixin:SelectRecipe(recipe)
 
     details.Content.Icon:SetTexture(recipe.icon)
     details.Content.Name:SetText(recipe.name)
-    details.Content.ProductValue:SetText(recipe.productValue or "Unknown")
-    details.Content.ReagentCost:SetText(recipe.cost)
-    details.Content.UnitProfit:SetText(recipe.unitProfit or "Unknown")
+    details.Content.ProductValue:SetText(FormatMoney(recipe.productValue))
+    details.Content.ReagentCost:SetText(FormatMoney(recipe.cost))
+    details.Content.UnitProfit:SetText(FormatMoney(recipe.unitProfit))
     details.Content.SoldPerDay:SetText(recipe.soldPerDay or "Unknown")
     details.Content.MarketShare:SetText(recipe.marketShare or "5%")
     details.Content.DailySales:SetText(recipe.dailySales or "Unknown")
-    details.Content.DailyProfit:SetText(recipe.dailyProfit)
+    details.Content.DailyProfit:SetText(FormatMoney(recipe.dailyProfit, "—"))
     details.Content.SuggestedStock:SetText(recipe.suggestedStock or "Unknown")
-    details.Content.Reagents:SetText(recipe.reagents or "Pricing data is unavailable.")
+    details.Content.Reagents:SetText(FormatReagents(recipe.reagents))
 end
 
 MarginmateMainFrameMixin = {}
