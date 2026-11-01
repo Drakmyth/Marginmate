@@ -6,7 +6,9 @@
 ## RequiredDeps:
 ## SavedVariables:
 ## SavedVariablesPerCharacter:
+## AddonCompartmentFunc: Marginmate_OnAddonCompartmentClick
 ## X-Repository: https://github.com/Drakmyth/Marginmate
 ## X-Discord: http://discord.com/invite/aQkD4grbe8
 
+Marginmate.lua
 Marginmate.xml
