@@ -1,35 +1,14 @@
 local addonName, Marginmate = ...
 
-local VALUE_POSITIVE = "|cff20ff20"
-local VALUE_NEGATIVE = "|cffff2020"
-local GOLD = "|cffffd700g|r"
-local SILVER = "|cffc7c7cfs|r"
-local COPPER = "|cffeda55fc|r"
-
 local function FormatMoney(value, unknownText)
     if value == nil then
-        return "|cff9d9d9d" .. (unknownText or "Unknown") .. "|r"
+        return DISABLED_FONT_COLOR:WrapTextInColorCode(unknownText or "Unknown")
     end
 
-    local color = value < 0 and VALUE_NEGATIVE or VALUE_POSITIVE
-    local amount = math.abs(value)
-    local gold = math.floor(amount / 10000)
-    local silver = math.floor((amount % 10000) / 100)
-    local copper = amount % 100
-    local sign = value < 0 and color .. "-|r" or ""
-    local parts = {}
-
-    if gold > 0 then
-        table.insert(parts, color .. gold .. "|r" .. GOLD)
-    end
-    if silver > 0 or gold > 0 then
-        table.insert(parts, color .. silver .. "|r" .. SILVER)
-    end
-    if copper > 0 or #parts == 0 then
-        table.insert(parts, color .. copper .. "|r" .. COPPER)
-    end
-
-    return sign .. table.concat(parts, " ")
+    local sign = value < 0 and "-" or ""
+    local text = sign .. C_CurrencyInfo.GetCoinTextureString(math.abs(value), 12)
+    local color = value < 0 and RED_FONT_COLOR or GREEN_FONT_COLOR
+    return color:WrapTextInColorCode(text)
 end
 
 local function FormatReagents(reagents)
