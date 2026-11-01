@@ -11,4 +11,10 @@
 ## X-Discord: http://discord.com/invite/aQkD4grbe8
 
 Marginmate.lua
+MarginmateMoney.lua
+MarginmateRecipeRowMixin.lua
+MarginmateReagentRowMixin.lua
+MarginmateBrowserMixin.lua
+MarginmateMainFrameMixin.lua
+MarginmateProfessionTab.lua
 Marginmate.xml
