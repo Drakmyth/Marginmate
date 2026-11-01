@@ -20,9 +20,9 @@
                     <Size x="64" y="30" />
                     <Anchors><Anchor point="LEFT" relativeKey="$parent.Name" relativePoint="RIGHT" x="4" /></Anchors>
                 </FontString>
-                <FontString parentKey="DailyProfit" inherits="GameFontHighlightSmall" justifyH="RIGHT">
+                <FontString parentKey="DailyProfit" inherits="GameFontHighlightSmall" justifyH="LEFT">
                     <Size x="70" y="30" />
-                    <Anchors><Anchor point="RIGHT" x="-4" /></Anchors>
+                    <Anchors><Anchor point="LEFT" x="256" /></Anchors>
                 </FontString>
             </Layer>
         </Layers>
@@ -70,9 +70,9 @@
                             <Size x="64" />
                             <Anchors><Anchor point="TOPLEFT" x="200" y="-38" /></Anchors>
                         </FontString>
-                        <FontString parentKey="ProfitHeader" inherits="GameFontNormalSmall" text="Profit/Day" justifyH="RIGHT">
+                        <FontString parentKey="ProfitHeader" inherits="GameFontNormalSmall" text="Profit/Day" justifyH="LEFT">
                             <Size x="70" />
-                            <Anchors><Anchor point="TOPRIGHT" x="-10" y="-38" /></Anchors>
+                            <Anchors><Anchor point="TOPLEFT" x="262" y="-38" /></Anchors>
                         </FontString>
                     </Layer>
                 </Layers>
