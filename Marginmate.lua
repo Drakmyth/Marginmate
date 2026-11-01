@@ -1,14 +1,47 @@
 local addonName, Marginmate = ...
 
-local function FormatMoney(value, unknownText)
+local GOLD = "|cffffd700g|r"
+local SILVER = "|cffc7c7cfs|r"
+local COPPER = "|cffeda55fc|r"
+
+local function GetMoneyColor(value)
+    return value < 0 and RED_FONT_COLOR or GREEN_FONT_COLOR
+end
+
+local function FormatCompactMoney(value, unknownText)
+    if value == nil then
+        return DISABLED_FONT_COLOR:WrapTextInColorCode(unknownText or "Unknown")
+    end
+
+    local color = GetMoneyColor(value)
+    local amount = math.abs(value)
+    local gold = math.floor(amount / 10000)
+    local silver = math.floor((amount % 10000) / 100)
+    local copper = amount % 100
+    local parts = {}
+
+    if gold > 0 then
+        table.insert(parts, color:WrapTextInColorCode(gold) .. GOLD)
+    end
+    if silver > 0 or gold > 0 then
+        table.insert(parts, color:WrapTextInColorCode(silver) .. SILVER)
+    end
+    if copper > 0 or #parts == 0 then
+        table.insert(parts, color:WrapTextInColorCode(copper) .. COPPER)
+    end
+
+    local sign = value < 0 and RED_FONT_COLOR:WrapTextInColorCode("-") or ""
+    return sign .. table.concat(parts, " ")
+end
+
+local function FormatDetailedMoney(value, unknownText)
     if value == nil then
         return DISABLED_FONT_COLOR:WrapTextInColorCode(unknownText or "Unknown")
     end
 
     local sign = value < 0 and "-" or ""
     local text = sign .. C_CurrencyInfo.GetCoinTextureString(math.abs(value), 12)
-    local color = value < 0 and RED_FONT_COLOR or GREEN_FONT_COLOR
-    return color:WrapTextInColorCode(text)
+    return GetMoneyColor(value):WrapTextInColorCode(text)
 end
 
 local function FormatReagents(reagents)
@@ -18,7 +51,7 @@ local function FormatReagents(reagents)
 
     local lines = {}
     for _, reagent in ipairs(reagents) do
-        table.insert(lines, string.format("%d × %s    %s", reagent.quantity, reagent.name, FormatMoney(reagent.cost)))
+        table.insert(lines, string.format("%d × %s    %s", reagent.quantity, reagent.name, FormatDetailedMoney(reagent.cost)))
     end
     return table.concat(lines, "\n")
 end
@@ -70,8 +103,8 @@ function MarginmateRecipeRowMixin:SetRecipe(recipe)
     self.recipe = recipe
     self.Icon:SetTexture(recipe.icon)
     self.Name:SetText(recipe.name)
-    self.Cost:SetText(FormatMoney(recipe.cost))
-    self.DailyProfit:SetText(FormatMoney(recipe.dailyProfit, "—"))
+    self.Cost:SetText(FormatCompactMoney(recipe.cost))
+    self.DailyProfit:SetText(FormatCompactMoney(recipe.dailyProfit, "—"))
 end
 
 MarginmateBrowserMixin = {}
@@ -114,13 +147,13 @@ function MarginmateBrowserMixin:SelectRecipe(recipe)
 
     details.Content.Icon:SetTexture(recipe.icon)
     details.Content.Name:SetText(recipe.name)
-    details.Content.ProductValue:SetText(FormatMoney(recipe.productValue))
-    details.Content.ReagentCost:SetText(FormatMoney(recipe.cost and -recipe.cost or nil))
-    details.Content.UnitProfit:SetText(FormatMoney(recipe.unitProfit))
+    details.Content.ProductValue:SetText(FormatDetailedMoney(recipe.productValue))
+    details.Content.ReagentCost:SetText(FormatDetailedMoney(recipe.cost and -recipe.cost or nil))
+    details.Content.UnitProfit:SetText(FormatDetailedMoney(recipe.unitProfit))
     details.Content.SoldPerDay:SetText(recipe.soldPerDay or "Unknown")
     details.Content.MarketShare:SetText(recipe.marketShare or "5%")
     details.Content.DailySales:SetText(recipe.dailySales or "Unknown")
-    details.Content.DailyProfit:SetText(FormatMoney(recipe.dailyProfit, "—"))
+    details.Content.DailyProfit:SetText(FormatDetailedMoney(recipe.dailyProfit, "—"))
     details.Content.SuggestedStock:SetText(recipe.suggestedStock or "Unknown")
     details.Content.Reagents:SetText(FormatReagents(recipe.reagents))
 end
