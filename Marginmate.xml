@@ -16,7 +16,7 @@
                     <Size x="150" y="30" />
                     <Anchors><Anchor point="LEFT" relativeKey="$parent.Icon" relativePoint="RIGHT" x="6" /></Anchors>
                 </FontString>
-                <FontString parentKey="Cost" inherits="GameFontHighlightSmall" justifyH="RIGHT">
+                <FontString parentKey="Cost" inherits="GameFontHighlightSmall" justifyH="LEFT">
                     <Size x="64" y="30" />
                     <Anchors><Anchor point="LEFT" relativeKey="$parent.Name" relativePoint="RIGHT" x="4" /></Anchors>
                 </FontString>
@@ -66,7 +66,7 @@
                             <Size x="150" />
                             <Anchors><Anchor point="TOPLEFT" x="46" y="-38" /></Anchors>
                         </FontString>
-                        <FontString parentKey="CostHeader" inherits="GameFontNormalSmall" text="Cost" justifyH="CENTER">
+                        <FontString parentKey="CostHeader" inherits="GameFontNormalSmall" text="Cost" justifyH="LEFT">
                             <Size x="64" />
                             <Anchors><Anchor point="TOPLEFT" x="200" y="-38" /></Anchors>
                         </FontString>
