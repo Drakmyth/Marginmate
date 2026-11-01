@@ -46,14 +46,16 @@ end
 
 local function FormatReagents(reagents)
     if not reagents then
-        return "Pricing data is unavailable."
+        return "Pricing data is unavailable.", ""
     end
 
-    local lines = {}
+    local names = {}
+    local costs = {}
     for _, reagent in ipairs(reagents) do
-        table.insert(lines, string.format("%d × %s    %s", reagent.quantity, reagent.name, FormatDetailedMoney(reagent.cost)))
+        table.insert(names, string.format("%d × %s", reagent.quantity, reagent.name))
+        table.insert(costs, FormatDetailedMoney(reagent.cost))
     end
-    return table.concat(lines, "\n")
+    return table.concat(names, "\n"), table.concat(costs, "\n")
 end
 
 Marginmate.mockRecipes = {
@@ -155,7 +157,9 @@ function MarginmateBrowserMixin:SelectRecipe(recipe)
     details.Content.DailySales:SetText(recipe.dailySales or "Unknown")
     details.Content.DailyProfit:SetText(FormatDetailedMoney(recipe.dailyProfit, "—"))
     details.Content.SuggestedStock:SetText(recipe.suggestedStock or "Unknown")
-    details.Content.Reagents:SetText(FormatReagents(recipe.reagents))
+    local reagentNames, reagentCosts = FormatReagents(recipe.reagents)
+    details.Content.ReagentNames:SetText(reagentNames)
+    details.Content.ReagentCosts:SetText(reagentCosts)
 end
 
 MarginmateMainFrameMixin = {}

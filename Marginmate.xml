@@ -125,7 +125,8 @@
                                 <FontString inherits="GameFontHighlight" text="Suggested stock"><Anchors><Anchor point="TOPLEFT" y="-234" /></Anchors></FontString>
                                 <FontString parentKey="SuggestedStock" inherits="GameFontHighlight" justifyH="RIGHT"><Anchors><Anchor point="TOPRIGHT" y="-234" /></Anchors></FontString>
                                 <FontString inherits="GameFontNormal" text="Reagents"><Anchors><Anchor point="TOPLEFT" y="-270" /></Anchors></FontString>
-                                <FontString parentKey="Reagents" inherits="GameFontHighlight" justifyH="LEFT" justifyV="TOP"><Size x="300" y="80" /><Anchors><Anchor point="TOPLEFT" y="-294" /></Anchors></FontString>
+                                <FontString parentKey="ReagentNames" inherits="GameFontHighlight" justifyH="LEFT" justifyV="TOP"><Size x="160" y="80" /><Anchors><Anchor point="TOPLEFT" y="-294" /></Anchors></FontString>
+                                <FontString parentKey="ReagentCosts" inherits="GameFontHighlight" justifyH="LEFT" justifyV="TOP"><Size x="140" y="80" /><Anchors><Anchor point="TOPLEFT" x="170" y="-294" /></Anchors></FontString>
                                 <FontString inherits="GameFontDisableSmall" text="Prototype values only. Calculations and TSM integration are not implemented." justifyH="LEFT"><Anchors><Anchor point="BOTTOMLEFT" /></Anchors></FontString>
                             </Layer>
                         </Layers>
