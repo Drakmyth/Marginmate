@@ -44,20 +44,6 @@ local function FormatDetailedMoney(value, unknownText)
     return GetMoneyColor(value):WrapTextInColorCode(text)
 end
 
-local function FormatReagents(reagents)
-    if not reagents then
-        return "Pricing data is unavailable.", ""
-    end
-
-    local names = {}
-    local costs = {}
-    for _, reagent in ipairs(reagents) do
-        table.insert(names, string.format("%d × %s", reagent.quantity, reagent.name))
-        table.insert(costs, FormatDetailedMoney(reagent.cost))
-    end
-    return table.concat(names, "\n"), table.concat(costs, "\n")
-end
-
 Marginmate.mockRecipes = {
     {
         icon = 134808,
@@ -71,8 +57,8 @@ Marginmate.mockRecipes = {
         dailySales = "3.1",
         suggestedStock = "3",
         reagents = {
-            { quantity = 4, name = "Mycobloom", cost = 200000 },
-            { quantity = 2, name = "Luredrop", cost = 528000 },
+            { icon = 134195, quantity = 4, name = "Mycobloom", cost = 200000 },
+            { icon = 134197, quantity = 2, name = "Luredrop", cost = 528000 },
         },
     },
     {
@@ -94,6 +80,19 @@ Marginmate.mockRecipes = {
         unitProfit = -15000,
     },
 }
+
+MarginmateReagentRowMixin = {}
+
+function MarginmateReagentRowMixin:SetReagent(reagent)
+    self:SetShown(reagent ~= nil)
+    if not reagent then
+        return
+    end
+
+    self.Icon:SetTexture(reagent.icon)
+    self.Name:SetText(string.format("%d × %s", reagent.quantity, reagent.name))
+    self.Cost:SetText(FormatDetailedMoney(-reagent.cost))
+end
 
 MarginmateRecipeRowMixin = {}
 
@@ -157,9 +156,16 @@ function MarginmateBrowserMixin:SelectRecipe(recipe)
     details.Content.DailySales:SetText(recipe.dailySales or "Unknown")
     details.Content.DailyProfit:SetText(FormatDetailedMoney(recipe.dailyProfit, "—"))
     details.Content.SuggestedStock:SetText(recipe.suggestedStock or "Unknown")
-    local reagentNames, reagentCosts = FormatReagents(recipe.reagents)
-    details.Content.ReagentNames:SetText(reagentNames)
-    details.Content.ReagentCosts:SetText(reagentCosts)
+
+    local reagentRows = {
+        details.Content.ReagentRow1,
+        details.Content.ReagentRow2,
+        details.Content.ReagentRow3,
+    }
+    for index, row in ipairs(reagentRows) do
+        row:SetReagent(recipe.reagents and recipe.reagents[index])
+    end
+    details.Content.NoReagents:SetShown(not recipe.reagents)
 end
 
 MarginmateMainFrameMixin = {}

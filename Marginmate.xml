@@ -30,6 +30,28 @@
         <Scripts><OnClick method="OnClick" /></Scripts>
     </Button>
 
+    <Frame name="MarginmateReagentRowTemplate" mixin="MarginmateReagentRowMixin" virtual="true">
+        <Size x="310" y="30" />
+        <Layers>
+            <Layer level="ARTWORK">
+                <Texture parentKey="Icon">
+                    <Size x="24" y="24" />
+                    <Anchors><Anchor point="LEFT" /></Anchors>
+                </Texture>
+            </Layer>
+            <Layer level="OVERLAY">
+                <FontString parentKey="Name" inherits="GameFontHighlight" justifyH="LEFT">
+                    <Size x="150" y="24" />
+                    <Anchors><Anchor point="LEFT" relativeKey="$parent.Icon" relativePoint="RIGHT" x="6" /></Anchors>
+                </FontString>
+                <FontString parentKey="Cost" inherits="GameFontHighlight" justifyH="LEFT">
+                    <Size x="120" y="24" />
+                    <Anchors><Anchor point="LEFT" x="190" /></Anchors>
+                </FontString>
+            </Layer>
+        </Layers>
+    </Frame>
+
     <Frame name="MarginmateBrowserTemplate" mixin="MarginmateBrowserMixin" virtual="true">
         <Frames>
             <Frame parentKey="LeftPane" inherits="InsetFrameTemplate3">
@@ -125,11 +147,21 @@
                                 <FontString inherits="GameFontHighlight" text="Suggested stock"><Anchors><Anchor point="TOPLEFT" y="-234" /></Anchors></FontString>
                                 <FontString parentKey="SuggestedStock" inherits="GameFontHighlight" justifyH="RIGHT"><Anchors><Anchor point="TOPRIGHT" y="-234" /></Anchors></FontString>
                                 <FontString inherits="GameFontNormal" text="Reagents"><Anchors><Anchor point="TOPLEFT" y="-270" /></Anchors></FontString>
-                                <FontString parentKey="ReagentNames" inherits="GameFontHighlight" justifyH="LEFT" justifyV="TOP"><Size x="160" y="80" /><Anchors><Anchor point="TOPLEFT" y="-294" /></Anchors></FontString>
-                                <FontString parentKey="ReagentCosts" inherits="GameFontHighlight" justifyH="LEFT" justifyV="TOP"><Size x="140" y="80" /><Anchors><Anchor point="TOPLEFT" x="170" y="-294" /></Anchors></FontString>
+                                <FontString parentKey="NoReagents" inherits="GameFontDisable" text="Pricing data is unavailable."><Anchors><Anchor point="TOPLEFT" y="-296" /></Anchors></FontString>
                                 <FontString inherits="GameFontDisableSmall" text="Prototype values only. Calculations and TSM integration are not implemented." justifyH="LEFT"><Anchors><Anchor point="BOTTOMLEFT" /></Anchors></FontString>
                             </Layer>
                         </Layers>
+                        <Frames>
+                            <Frame parentKey="ReagentRow1" inherits="MarginmateReagentRowTemplate">
+                                <Anchors><Anchor point="TOPLEFT" y="-288" /></Anchors>
+                            </Frame>
+                            <Frame parentKey="ReagentRow2" inherits="MarginmateReagentRowTemplate">
+                                <Anchors><Anchor point="TOPLEFT" relativeKey="$parent.ReagentRow1" relativePoint="BOTTOMLEFT" /></Anchors>
+                            </Frame>
+                            <Frame parentKey="ReagentRow3" inherits="MarginmateReagentRowTemplate">
+                                <Anchors><Anchor point="TOPLEFT" relativeKey="$parent.ReagentRow2" relativePoint="BOTTOMLEFT" /></Anchors>
+                            </Frame>
+                        </Frames>
                     </Frame>
                 </Frames>
             </Frame>
