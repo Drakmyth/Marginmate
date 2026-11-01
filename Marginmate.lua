@@ -151,10 +151,16 @@ MarginmateMainFrameMixin = {}
 function MarginmateMainFrameMixin:OnLoad()
     self:SetTitle("Marginmate")
     self:SetPortraitToAsset("Interface/Icons/inv_misc_coin_02")
+    self:RegisterForDrag("LeftButton")
 end
 
 function Marginmate.Toggle()
-    MarginmateMainFrame:SetShown(not MarginmateMainFrame:IsShown())
+    local showStandalone = not MarginmateMainFrame:IsShown()
+    if showStandalone and ProfessionsFrame and Marginmate.professionTabID
+        and ProfessionsFrame:GetTab() == Marginmate.professionTabID then
+        ProfessionsFrame:SetTab(ProfessionsFrame.recipesTabID)
+    end
+    MarginmateMainFrame:SetShown(showStandalone)
 end
 
 SLASH_MARGINMATE1 = "/marginmate"
@@ -179,6 +185,7 @@ local function InitializeProfessionTab()
         return ProfessionsFrame.CraftingPage:GetDesiredPageWidth()
     end
     page:SetScript("OnShow", function(self)
+        MarginmateMainFrame:Hide()
         local info = ProfessionsFrame:GetProfessionInfo()
         self:SetContext(UnitName("player"), info and (info.professionName or info.parentProfessionName))
     end)
