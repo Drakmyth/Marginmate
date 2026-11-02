@@ -3,7 +3,6 @@ local _, Marginmate = ...
 MarginmateBrowserMixin = {}
 
 function MarginmateBrowserMixin:OnLoad()
-    self.LeftPane.SearchBox.Instructions:SetText("Search recipes")
     self.LeftPane.FilterDropdown:SetupMenu(function(_, rootDescription)
         rootDescription:CreateTitle("Character")
         rootDescription:CreateButton(self.contextCharacter or "All", function() end)

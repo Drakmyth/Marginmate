@@ -81,6 +81,9 @@
                         <Anchors><Anchor point="TOPRIGHT" x="-8" y="-9" /></Anchors>
                     </DropdownButton>
                     <EditBox parentKey="SearchBox" autoFocus="false" inherits="SearchBoxTemplate">
+                        <KeyValues>
+                            <KeyValue key="instructionText" value="Search recipes" type="string" />
+                        </KeyValues>
                         <Size y="20" />
                         <Anchors>
                             <Anchor point="RIGHT" relativeKey="$parent.FilterDropdown" relativePoint="LEFT" x="-4" />
@@ -173,6 +176,10 @@
     </Frame>
 
     <Frame name="MarginmateMainFrame" mixin="MarginmateMainFrameMixin" parent="UIParent" inherits="PortraitFrameTemplate" movable="true" enableMouse="true" hidden="true">
+        <KeyValues>
+            <KeyValue key="title" value="Marginmate" type="string" />
+            <KeyValue key="portraitIcon" value="Interface\Icons\inv_misc_coin_02" type="string" />
+        </KeyValues>
         <Size x="820" y="520" />
         <Anchors><Anchor point="CENTER" /></Anchors>
         <Frames>
