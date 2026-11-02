@@ -2,11 +2,29 @@
 ## Version: 0.1.120105.0
 ## Author: Drakmyth
 ## Title: Marginmate
-## Notes: Identifies potentially profitable products from recipes your characters know.
+## IconTexture: Interface/Icons/inv_misc_coin_02
+## Notes: |cff9d9d9dby|r |cff8788eeDrakmyth|r|n|nHelps you discover potential crafting profits while you loiter at the auction house.
 ## RequiredDeps:
 ## SavedVariables:
 ## SavedVariablesPerCharacter:
+## AddonCompartmentFunc: Marginmate_OnAddonCompartmentClick
 ## X-Repository: https://github.com/Drakmyth/Marginmate
 ## X-Discord: http://discord.com/invite/aQkD4grbe8
 
+# Init
+Marginmate.lua
+
+# Utilities
+MarginmateMoney.lua
+
+# Mixins
+MarginmateRecipeRowMixin.lua
+MarginmateReagentRowMixin.lua
+MarginmateBrowserMixin.lua
+MarginmateMainFrameMixin.lua
+
+# Integration
+MarginmateProfessionTab.lua
+
+# Frames
 Marginmate.xml

@@ -1,2 +1,196 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/">
+    <Button name="MarginmateRecipeRowTemplate" mixin="MarginmateRecipeRowMixin" virtual="true">
+        <Size x="330" y="38" />
+        <Layers>
+            <Layer level="BACKGROUND">
+                <Texture parentKey="Selected" atlas="Options_List_Active" hidden="true" />
+            </Layer>
+            <Layer level="ARTWORK">
+                <Texture parentKey="Icon">
+                    <Size x="30" y="30" />
+                    <Anchors><Anchor point="LEFT" x="4" /></Anchors>
+                </Texture>
+            </Layer>
+            <Layer level="OVERLAY">
+                <FontString parentKey="Name" inherits="GameFontHighlightSmall" justifyH="LEFT">
+                    <Size x="150" y="30" />
+                    <Anchors><Anchor point="LEFT" relativeKey="$parent.Icon" relativePoint="RIGHT" x="6" /></Anchors>
+                </FontString>
+                <FontString parentKey="Cost" inherits="GameFontHighlightSmall" justifyH="LEFT">
+                    <Size x="64" y="30" />
+                    <Anchors><Anchor point="LEFT" relativeKey="$parent.Name" relativePoint="RIGHT" x="4" /></Anchors>
+                </FontString>
+                <FontString parentKey="DailyProfit" inherits="GameFontHighlightSmall" justifyH="RIGHT">
+                    <Size x="70" y="30" />
+                    <Anchors><Anchor point="RIGHT" x="-4" /></Anchors>
+                </FontString>
+            </Layer>
+        </Layers>
+        <HighlightTexture atlas="Options_List_Hover" alphaMode="ADD" />
+        <Scripts><OnClick method="OnClick" /></Scripts>
+    </Button>
+
+    <Frame name="MarginmateReagentRowTemplate" mixin="MarginmateReagentRowMixin" virtual="true">
+        <Size x="310" y="30" />
+        <Layers>
+            <Layer level="ARTWORK">
+                <Texture parentKey="Icon">
+                    <Size x="24" y="24" />
+                    <Anchors><Anchor point="LEFT" /></Anchors>
+                </Texture>
+            </Layer>
+            <Layer level="OVERLAY">
+                <FontString parentKey="Name" inherits="GameFontHighlight" justifyH="LEFT">
+                    <Size x="150" y="24" />
+                    <Anchors><Anchor point="LEFT" relativeKey="$parent.Icon" relativePoint="RIGHT" x="6" /></Anchors>
+                </FontString>
+                <FontString parentKey="Cost" inherits="GameFontHighlight" justifyH="LEFT">
+                    <Size x="120" y="24" />
+                    <Anchors><Anchor point="LEFT" x="190" /></Anchors>
+                </FontString>
+            </Layer>
+        </Layers>
+    </Frame>
+
+    <Frame name="MarginmateBrowserTemplate" mixin="MarginmateBrowserMixin" virtual="true">
+        <Frames>
+            <Frame parentKey="LeftPane" inherits="InsetFrameTemplate3">
+                <Size x="342" />
+                <Anchors>
+                    <Anchor point="TOPLEFT" x="8" y="-8" />
+                    <Anchor point="BOTTOMLEFT" x="8" y="8" />
+                </Anchors>
+                <Layers>
+                    <Layer level="OVERLAY">
+                        <FontString parentKey="RecipeHeader" inherits="GameFontNormalSmall" text="Recipe" justifyH="LEFT">
+                            <Size x="150" />
+                            <Anchors><Anchor point="TOPLEFT" x="46" y="-38" /></Anchors>
+                        </FontString>
+                        <FontString parentKey="CostHeader" inherits="GameFontNormalSmall" text="Cost" justifyH="LEFT">
+                            <Size x="64" />
+                            <Anchors><Anchor point="TOPLEFT" x="200" y="-38" /></Anchors>
+                        </FontString>
+                        <FontString parentKey="ProfitHeader" inherits="GameFontNormalSmall" text="Profit/Day" justifyH="RIGHT">
+                            <Size x="70" />
+                            <Anchors><Anchor point="TOPRIGHT" x="-10" y="-38" /></Anchors>
+                        </FontString>
+                    </Layer>
+                </Layers>
+                <Frames>
+                    <DropdownButton parentKey="FilterDropdown" inherits="WowStyle1FilterDropdownTemplate">
+                        <Anchors><Anchor point="TOPRIGHT" x="-8" y="-9" /></Anchors>
+                    </DropdownButton>
+                    <EditBox parentKey="SearchBox" autoFocus="false" inherits="SearchBoxTemplate">
+                        <KeyValues>
+                            <KeyValue key="instructionText" value="Search recipes" type="string" />
+                        </KeyValues>
+                        <Size y="20" />
+                        <Anchors>
+                            <Anchor point="RIGHT" relativeKey="$parent.FilterDropdown" relativePoint="LEFT" x="-4" />
+                            <Anchor point="TOPLEFT" x="13" y="-8" />
+                        </Anchors>
+                    </EditBox>
+                    <Frame parentKey="Rows">
+                        <Anchors>
+                            <Anchor point="TOPLEFT" x="6" y="-54" />
+                            <Anchor point="BOTTOMRIGHT" x="-6" y="6" />
+                        </Anchors>
+                        <Frames>
+                            <Button parentKey="Row1" inherits="MarginmateRecipeRowTemplate">
+                                <Anchors><Anchor point="TOPLEFT" /></Anchors>
+                            </Button>
+                            <Button parentKey="Row2" inherits="MarginmateRecipeRowTemplate">
+                                <Anchors><Anchor point="TOPLEFT" relativeKey="$parent.Row1" relativePoint="BOTTOMLEFT" /></Anchors>
+                            </Button>
+                            <Button parentKey="Row3" inherits="MarginmateRecipeRowTemplate">
+                                <Anchors><Anchor point="TOPLEFT" relativeKey="$parent.Row2" relativePoint="BOTTOMLEFT" /></Anchors>
+                            </Button>
+                            <Button parentKey="Row4" inherits="MarginmateRecipeRowTemplate">
+                                <Anchors><Anchor point="TOPLEFT" relativeKey="$parent.Row3" relativePoint="BOTTOMLEFT" /></Anchors>
+                            </Button>
+                        </Frames>
+                    </Frame>
+                </Frames>
+            </Frame>
+            <Frame parentKey="RightPane" inherits="InsetFrameTemplate3">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeKey="$parent.LeftPane" relativePoint="TOPRIGHT" x="6" />
+                    <Anchor point="BOTTOMRIGHT" x="-8" y="8" />
+                </Anchors>
+                <Layers>
+                    <Layer level="OVERLAY">
+                        <FontString parentKey="EmptyState" inherits="GameFontDisableLarge" text="Select a recipe to view its opportunity details." justifyH="CENTER">
+                            <Size x="300" y="40" />
+                            <Anchors><Anchor point="CENTER" /></Anchors>
+                        </FontString>
+                    </Layer>
+                </Layers>
+                <Frames>
+                    <Frame parentKey="Content">
+                        <Anchors><Anchor point="TOPLEFT" x="16" y="-16" /><Anchor point="BOTTOMRIGHT" x="-16" y="16" /></Anchors>
+                        <Layers>
+                            <Layer level="ARTWORK">
+                                <Texture parentKey="Icon"><Size x="40" y="40" /><Anchors><Anchor point="TOPLEFT" /></Anchors></Texture>
+                            </Layer>
+                            <Layer level="OVERLAY">
+                                <FontString parentKey="Name" inherits="GameFontNormalLarge" justifyH="LEFT"><Anchors><Anchor point="LEFT" relativeKey="$parent.Icon" relativePoint="RIGHT" x="10" /></Anchors></FontString>
+                                <FontString inherits="GameFontNormal" text="Pricing"><Anchors><Anchor point="TOPLEFT" y="-58" /></Anchors></FontString>
+                                <FontString inherits="GameFontHighlight" text="Product value"><Anchors><Anchor point="TOPLEFT" y="-82" /></Anchors></FontString>
+                                <FontString parentKey="ProductValue" inherits="GameFontHighlight" justifyH="RIGHT"><Anchors><Anchor point="TOPRIGHT" y="-82" /></Anchors></FontString>
+                                <FontString inherits="GameFontHighlight" text="Reagent cost"><Anchors><Anchor point="TOPLEFT" y="-98" /></Anchors></FontString>
+                                <FontString parentKey="ReagentCost" inherits="GameFontHighlight" justifyH="RIGHT"><Anchors><Anchor point="TOPRIGHT" y="-98" /></Anchors></FontString>
+                                <FontString inherits="GameFontHighlight" text="Unit profit"><Anchors><Anchor point="TOPLEFT" y="-114" /></Anchors></FontString>
+                                <FontString parentKey="UnitProfit" inherits="GameFontHighlight" justifyH="RIGHT"><Anchors><Anchor point="TOPRIGHT" y="-114" /></Anchors></FontString>
+                                <FontString inherits="GameFontNormal" text="Market estimate"><Anchors><Anchor point="TOPLEFT" y="-146" /></Anchors></FontString>
+                                <FontString inherits="GameFontHighlight" text="Regional sold/day"><Anchors><Anchor point="TOPLEFT" y="-170" /></Anchors></FontString>
+                                <FontString parentKey="SoldPerDay" inherits="GameFontHighlight" justifyH="RIGHT"><Anchors><Anchor point="TOPRIGHT" y="-170" /></Anchors></FontString>
+                                <FontString inherits="GameFontHighlight" text="Assumed market share"><Anchors><Anchor point="TOPLEFT" y="-186" /></Anchors></FontString>
+                                <FontString parentKey="MarketShare" inherits="GameFontHighlight" justifyH="RIGHT"><Anchors><Anchor point="TOPRIGHT" y="-186" /></Anchors></FontString>
+                                <FontString inherits="GameFontHighlight" text="Estimated daily sales"><Anchors><Anchor point="TOPLEFT" y="-202" /></Anchors></FontString>
+                                <FontString parentKey="DailySales" inherits="GameFontHighlight" justifyH="RIGHT"><Anchors><Anchor point="TOPRIGHT" y="-202" /></Anchors></FontString>
+                                <FontString inherits="GameFontHighlight" text="Estimated profit/day"><Anchors><Anchor point="TOPLEFT" y="-218" /></Anchors></FontString>
+                                <FontString parentKey="DailyProfit" inherits="GameFontHighlight" justifyH="RIGHT"><Anchors><Anchor point="TOPRIGHT" y="-218" /></Anchors></FontString>
+                                <FontString inherits="GameFontHighlight" text="Suggested stock"><Anchors><Anchor point="TOPLEFT" y="-234" /></Anchors></FontString>
+                                <FontString parentKey="SuggestedStock" inherits="GameFontHighlight" justifyH="RIGHT"><Anchors><Anchor point="TOPRIGHT" y="-234" /></Anchors></FontString>
+                                <FontString inherits="GameFontNormal" text="Reagents"><Anchors><Anchor point="TOPLEFT" y="-270" /></Anchors></FontString>
+                                <FontString parentKey="NoReagents" inherits="GameFontDisable" text="Pricing data is unavailable."><Anchors><Anchor point="TOPLEFT" y="-296" /></Anchors></FontString>
+                                <FontString inherits="GameFontDisableSmall" text="Prototype values only. Calculations and TSM integration are not implemented." justifyH="LEFT"><Anchors><Anchor point="BOTTOMLEFT" /></Anchors></FontString>
+                            </Layer>
+                        </Layers>
+                        <Frames>
+                            <Frame parentKey="ReagentRow1" inherits="MarginmateReagentRowTemplate">
+                                <Anchors><Anchor point="TOPLEFT" y="-288" /></Anchors>
+                            </Frame>
+                            <Frame parentKey="ReagentRow2" inherits="MarginmateReagentRowTemplate">
+                                <Anchors><Anchor point="TOPLEFT" relativeKey="$parent.ReagentRow1" relativePoint="BOTTOMLEFT" /></Anchors>
+                            </Frame>
+                            <Frame parentKey="ReagentRow3" inherits="MarginmateReagentRowTemplate">
+                                <Anchors><Anchor point="TOPLEFT" relativeKey="$parent.ReagentRow2" relativePoint="BOTTOMLEFT" /></Anchors>
+                            </Frame>
+                        </Frames>
+                    </Frame>
+                </Frames>
+            </Frame>
+        </Frames>
+        <Scripts><OnLoad method="OnLoad" /></Scripts>
+    </Frame>
+
+    <Frame name="MarginmateMainFrame" mixin="MarginmateMainFrameMixin" parent="UIParent" inherits="PortraitFrameTemplate" movable="true" enableMouse="true" hidden="true">
+        <KeyValues>
+            <KeyValue key="title" value="Marginmate" type="string" />
+            <KeyValue key="portraitIcon" value="Interface\Icons\inv_misc_coin_02" type="string" />
+        </KeyValues>
+        <Size x="820" y="520" />
+        <Anchors><Anchor point="CENTER" /></Anchors>
+        <Frames>
+            <Frame parentKey="Browser" inherits="MarginmateBrowserTemplate">
+                <Anchors><Anchor point="TOPLEFT" x="4" y="-58" /><Anchor point="BOTTOMRIGHT" x="-4" y="4" /></Anchors>
+            </Frame>
+        </Frames>
+        <Scripts>
+            <OnLoad method="OnLoad" />
+            <OnDragStart>self:StartMoving();</OnDragStart>
+            <OnDragStop>self:StopMovingOrSizing();</OnDragStop>
+        </Scripts>
+    </Frame>
 </Ui>
